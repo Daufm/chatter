@@ -40,7 +40,11 @@ const SignUpPage = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/register`, {
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+      console.log('Attempting to register with URL:', `${API_BASE_URL}/users/register`);
+      console.log('Form data:', { username: formData.username, email: formData.email });
+
+      const response = await fetch(`${API_BASE_URL}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +56,9 @@ const SignUpPage = () => {
         }),
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (response.ok) {
         login(data.token, data.user);
@@ -60,7 +66,8 @@ const SignUpPage = () => {
       } else {
         setError(data.message || 'Registration failed');
       }
-    } catch {
+    } catch (error) {
+      console.error('Registration error:', error);
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);
