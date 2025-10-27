@@ -33,7 +33,7 @@ Since Vercel doesn't support WebSockets well, deploy the backend separately:
 4. Add environment variables:
    ```
    PORT=3000
-   MONGODB_URI=mongodb+srv://fuadmohammed:fuadkoko@cluster0.ueqsxsa.mongodb.net/chatsapp?retryWrites=true&w=majority
+   MONGODB_URI=your mongo atlas uri
    JWT_SECRET=your-production-jwt-secret
    FRONTEND_URL=https://your-vercel-app.vercel.app
    PRODUCTION_FRONTEND_URL=https://your-vercel-app.vercel.app
