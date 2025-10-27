@@ -1,8 +1,15 @@
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('token');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
 
 export const getContacts = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/users/contacts`);
+    const response = await fetch(`${API_BASE_URL}/users/contacts`, {
+      headers: getAuthHeaders()
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch contacts');
     }
@@ -15,7 +22,9 @@ export const getContacts = async () => {
 
 export const getGroups = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/groups`);
+    const response = await fetch(`${API_BASE_URL}/groups`, {
+      headers: getAuthHeaders()
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch groups');
     }
@@ -28,7 +37,9 @@ export const getGroups = async () => {
 
 export const getMessages = async (recipientId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/messages?recipient=${recipientId}`);
+    const response = await fetch(`${API_BASE_URL}/messages?recipient=${recipientId}`, {
+      headers: getAuthHeaders()
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch messages');
     }
