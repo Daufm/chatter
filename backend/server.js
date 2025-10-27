@@ -23,7 +23,9 @@ const io = new Server(server, {
   cors: {
     origin: [
       process.env.FRONTEND_URL || 'http://localhost:5173',
-      process.env.PRODUCTION_FRONTEND_URL
+      process.env.PRODUCTION_FRONTEND_URL,
+      'https://chatter-nine-tau.vercel.app',
+      'https://chatter-*.vercel.app' // Allow any chatter vercel app
     ].filter(Boolean),
     methods: ['GET', 'POST'],
   },
