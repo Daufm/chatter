@@ -1,31 +1,25 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Chat App
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `main` | **Date**: 2025-10-27 | **Spec**: /specs/main/spec.md
+**Input**: Feature specification from `/specs/main/spec.md`
 
 **Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Implement a real-time chat application with sidebar for contacts/groups, main chat window with timestamps, message input with emoji and file upload, and responsive layout for mobile/desktop. Technical approach: Frontend with Vite + React + TailwindCSS + ShadCN UI; Backend with Node.js + Express + Socket.io + MongoDB (Mongoose) + local file storage; Real-time via WebSocket.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: JavaScript (ES6+), Node.js 18+  
+**Primary Dependencies**: Vite, React, TailwindCSS, ShadCN UI, Express, Socket.io, Mongoose  
+**Storage**: MongoDB for messages/users/groups, local filesystem for file uploads (upgrade to S3 later)  
+**Testing**: Jest + React Testing Library for frontend, NEEDS CLARIFICATION for backend (e.g., Jest or Mocha)  
+**Target Platform**: Web browsers (Chrome, Firefox, Safari), responsive for mobile/desktop  
+**Project Type**: Web application (frontend + backend)  
+**Performance Goals**: Message appearance within 500 ms (p95)  
+**Constraints**: Real-time messaging via WebSocket, responsive UI, accessibility compliant  
+**Scale/Scope**: NEEDS CLARIFICATION (e.g., 100 concurrent users, 1000 messages/day initially)
 
 ## Constitution Check
 

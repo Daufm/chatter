@@ -1,0 +1,181 @@
+openapi: 3.0.3
+info:
+  title: Chat App API
+  version: 1.0.0
+  description: API for real-time chat application
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /users/contacts:
+    get:
+      summary: Get user contacts
+      responses:
+        "200":
+          description: List of contacts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  /groups:
+    get:
+      summary: Get user groups
+      responses:
+        "200":
+          description: List of groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+  /messages:
+    get:
+      summary: Get messages for recipient
+      parameters:
+        - name: recipient
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: recipientType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [user, group]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: before
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Message"
+    post:
+      summary: Send a message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipient:
+                  type: string
+                recipientType:
+                  type: string
+                  enum: [user, group]
+                content:
+                  type: string
+                attachments:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - recipient
+                - recipientType
+      responses:
+        "201":
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+  /files:
+    post:
+      summary: Upload a file
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "201":
+          description: File uploaded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/File"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        createdBy:
+          type: string
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        sender:
+          type: string
+        recipient:
+          type: string
+        recipientType:
+          type: string
+        content:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+        filename:
+          type: string
+        url:
+          type: string
+        uploadedBy:
+          type: string
+        size:
+          type: integer
+        mimeType:
+          type: string
