@@ -51,7 +51,7 @@ initializeSocket(io);
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/chatapp')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
     server.listen(PORT, () => {
@@ -60,4 +60,5 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/chatapp')
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err);
+    process.exit(1); // Exit on connection failure
   });
