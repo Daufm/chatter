@@ -17,7 +17,7 @@ const MessageInput = ({ onSend }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/files', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/files`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

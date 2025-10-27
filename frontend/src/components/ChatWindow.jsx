@@ -19,7 +19,7 @@ const ChatWindow = ({ recipient }) => {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/api/messages?recipient=${recipient.id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/messages?recipient=${recipient.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -84,7 +84,7 @@ const ChatWindow = ({ recipient }) => {
   const handleSend = async (message) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/messages', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -155,13 +155,13 @@ const ChatWindow = ({ recipient }) => {
                   <div className="mt-2">
                     {message.file.mimetype.startsWith('image/') ? (
                       <img
-                        src={`http://localhost:3000${message.file.url}`}
+                        src={`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}${message.file.url}`}
                         alt={message.file.originalName}
                         className="max-w-full h-auto rounded"
                       />
                     ) : (
                       <a
-                        href={`http://localhost:3000${message.file.url}`}
+                        href={`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}${message.file.url}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:underline"
